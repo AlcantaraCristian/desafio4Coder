@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const {Router} = express
+const { Router } = express
 
 app.use(express.static(__dirname + '/public'))
 app.use(express.urlencoded({ extended: true }))
@@ -12,27 +12,57 @@ const producto = new Contenedor('./public/productos.txt');
 
 /* --------------------------------------------- */
 
-routerProductos.get('/', async (req,res)=>{  
-     
-   res.send(await producto.getAll())
+//Muestra todos los productos
+
+routerProductos.get('/', async (req, res) => {
+
+    res.send(await producto.getAll())
+
 })
 
-routerProductos.get('/:id',async (req,res)=>{
-    const id =  parseInt(req.params)
-    
+// Muestra el producto segun su ID
+
+routerProductos.get('/:id', async (req, res) => {
+
+    const { id } = req.params
+
     res.send(await producto.getById(id))
+})
+
+// Agrega prducto
+
+routerProductos.post('/', async (req, res) => {
+
+    const product = req.body
     
+    res.send(await producto.save(product))
+
 })
 
-routerProductos.post('/',async (req,res)=>{    
-    const {product} =  req.body    
-    res.json(await producto.save(product))
+// Modifica el producto segun su ID
+
+routerProductos.put('/:id', async (req, res) => {
+
+    const { id } = req.params
+    const productoMod = {}
+    productoMod.title = req.body.title
+    productoMod.price = req.body.price
+    productoMod.thumbnail = req.body.thumbnail
+    await producto.modifById(id, productoMod)
+    res.send('Producto Modificado')
+
 })
 
-routerProductos.delete('/:id',async (req, res) => {
-    const id = parseInt(req.params.id);  
-    res.send(await deleteById(id))
+// Elimina el producto segun su ID
+
+routerProductos.delete('/:id', async (req, res) => {
+
+    const { id } = req.params
+    await producto.deleteById(id)
+    res.send('Producto eliminado')
+
 })
+
 // Carga de Routers
 
 app.use('/api/productos', routerProductos)
