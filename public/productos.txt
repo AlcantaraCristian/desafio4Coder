@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Joystick",
+    "price": 3999,
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_637684-MLA32150735810_092019-V.webp",
+    "id": 1
+  },
+  {
+    "title": "Teclado Mecanico",
+    "price": 9299,
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_935185-MLA46504064329_062021-O.webp",
+    "id": 2
+  },
+  {
+    "title": "Mouse ",
+    "price": 6485,
+    "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_935858-MLA32149626950_092019-O.webp",
+    "id": 3
+  }  
+]
